@@ -1,8 +1,10 @@
 package com.design;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,17 +16,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 public class BaseBallGameView {
 	////////////   메뉴바 추가하기 ///////////////
-	JMenuBar jmb        = new JMenuBar();                     //전
-	JMenu    jm_game    = new JMenu("게임(G)");                
-	JMenuItem  jmi_new  = new JMenuItem("게임시작");            // 역 
+	JMenuBar jmb        = new JMenuBar();
+	JMenu    jm_game    = new JMenu("게임(G)");
+	JMenuItem  jmi_new  = new JMenuItem("게임시작");
 	JMenuItem  jmi_dap  = new JMenuItem("정답");
 	JSeparator js_game = new JSeparator();
-	JMenuItem  jmi_exit = new JMenuItem("나가기");             //변 
+	JMenuItem  jmi_exit = new JMenuItem("나가기");
 	JMenu    jm_about   = new JMenu("도움말(H)");
 	JMenuItem jmi_info  = new JMenuItem("야구숫자게임이란?");
-	JMenuItem jmi_maker = new JMenuItem("만든사람들");         //수 
+	JMenuItem jmi_maker = new JMenuItem("만든사람들");
 	///////////   메뉴바 추가하기 ///////////////
 	JOptionPane jop   = new JOptionPane();
 	JFrame jf         = new JFrame();
@@ -33,8 +36,8 @@ public class BaseBallGameView {
 	JTextArea jta_display = new JTextArea();
 	JScrollPane jsp_display = new JScrollPane(jta_display,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	JTextField jtf_input = new JTextField();
-	String[] jbtns_label = {"새게임","정답","지우기","종료"};//전역변수인데.. 배열입니다.
-	JButton[] jbtns = new JButton[4];//배열선언만 하다 .
+	String[] jbtns_label = {"새게임","정답","지우기","종료"};
+	JButton[] jbtns = new JButton[4];
 	//JTexaArea에 순번 출력하기
 	int cnt = 0;
 	//만든이들 다이얼로그 닫기 버튼추가
@@ -46,14 +49,13 @@ public class BaseBallGameView {
 	
 	//화면처리하기
 	public void initDisplay(){
-		jm_game.add(jmi_new);//게임G -> 게임시작
-		jm_game.add(jmi_dap);// ->정답
-		jm_game.add(js_game);// -> 
-		jm_game.add(jmi_exit);// -> 나가기
-		jm_about.add(jmi_info); // -> 야구숫자게임이란
-		jm_about.add(jmi_maker);// -> 만든사람들
-		jmb.add(jm_game);// 전역번수값들이 파라미터로 넘겨서 실행이 됩니다.
-		                 // 세팅용 함수들입니다.
+		jm_game.add(jmi_new);
+		jm_game.add(jmi_dap);
+		jm_game.add(js_game);
+		jm_game.add(jmi_exit);
+		jm_about.add(jmi_info);
+		jm_about.add(jmi_maker);
+		jmb.add(jm_game);
 		jmb.add(jm_about);
 		//JFrame에 JMenuBar설정
 		jf.setJMenuBar(jmb);
@@ -63,11 +65,9 @@ public class BaseBallGameView {
 		jp_east.setLayout(new GridLayout(4,1,2,2));
 		jp_center.setBackground(Color.green);
 		jp_east.setBackground(Color.yellow);
-		for(int i=0;i<4;i++){//i은 0으로 초기화 , i는 4보다 작을 떄까지 반복한다, i++ 한번반복될떄마다 1씩추가된다.
+		for(int i=0;i<4;i++){
 			jbtns[i] = new JButton(jbtns_label[i]);
-			System.out.println("-------------------------");
 			System.out.println(jbtns[i]);//@abc1234
-			System.out.println("-------------------------");
 			jp_east.add(jbtns[i]);
 			jbtns[i].addActionListener(bbgEvent);
 		}
@@ -103,5 +103,7 @@ public class BaseBallGameView {
 	public static void main(String[] args) {
 		BaseBallGameView bbgView = new BaseBallGameView();
 		bbgView.initDisplay();
+
 	}
+
 }

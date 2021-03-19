@@ -1,4 +1,5 @@
 package com.design;
+
 public class BaseBallGameLogic {
 	//컴퓨터가 난수발생으로 얻어낸 값 저장\
 	//채번하는 메소드가 필요함.
@@ -20,7 +21,7 @@ public class BaseBallGameLogic {
 	}		
 	//전광판에 출력될 메시지를 작성하는 메소드 선언
 	/*****************************************************************
-	 *
+	 * 
 	 * @param input jp_center속지-남쪽 -JTextField - "256"
 	 * @return 1스 0볼, 2스 1볼(2자리는 숫자도 같고 위치도 같을때,1 숫자는 있지만 위치가 다름)
 	 * 1회 : 256 - 1스 0볼

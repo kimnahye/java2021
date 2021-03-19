@@ -4,4 +4,4 @@ public class Protocol {
 	public static final int MESSAGE 	= 200;
 	public static final int WHISPHER 	= 300;
 	public static final int EXIT 		= 500;
-}
+}   

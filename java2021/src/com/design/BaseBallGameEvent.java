@@ -1,22 +1,22 @@
 package com.design;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
 
-
-
 public class BaseBallGameEvent implements ActionListener {
-	BaseBallGameView bbgView = null;
+	BaseBallGameView bbgView = null; 
 	BaseBallGameLogic bbgLogic = null;
-	
 	public BaseBallGameEvent(BaseBallGameView bbgView) {
 		this.bbgView = bbgView;
 	}
-	
+
 	public BaseBallGameEvent(BaseBallGameView bbgView, BaseBallGameLogic bbgLogic) {
 		this.bbgView = bbgView;		
 		this.bbgLogic = bbgLogic;
 	}
+
 	//ActionListener인 나는 버튼눌렀을 때 일어날 일에 대해서 알수가 없다.
 	//결정할 수 없다.
 	//모르겠다.
@@ -37,7 +37,7 @@ public class BaseBallGameEvent implements ActionListener {
 				 bbgView.jtf_input.setText("");
 				 bbgView.jtf_input.requestFocus();				
 				return ;
-			}//숫자가아니면 에러처리
+			}
 			
 			if(input.length()!=3){
 				return;
@@ -71,4 +71,5 @@ public class BaseBallGameEvent implements ActionListener {
 			bbgView.jtf_input.requestFocus();
 		}
 	}
+
 }

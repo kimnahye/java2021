@@ -1,4 +1,5 @@
 package com.design;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -6,7 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;     
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -16,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-public abstract class BaseBallGame extends JFrame implements ActionListener{
+public class BaseBallGame extends JFrame implements ActionListener{
 	////////////   메뉴바 추가하기 ///////////////
 	JMenuBar jmb        = new JMenuBar();
 	JMenu    jm_game    = new JMenu("게임(G)");
@@ -42,8 +43,8 @@ public abstract class BaseBallGame extends JFrame implements ActionListener{
 	//만든이들 다이얼로그 닫기 버튼추가
 	JButton jbtn_close = null;	
 	//컴퓨터가 난수발생으로 얻어낸 값 저장
-	int[] com = new int[3];	
-	int[] my = new int[3];	
+	int[] com = new int[3];	//Logic
+	int[] my = new int[3];	//Logic
 	public void nanSu(){
 		com[0] = (int)(Math.random()*10);
 		do{
@@ -86,120 +87,119 @@ public abstract class BaseBallGame extends JFrame implements ActionListener{
 		}//////////  end of outter for  ////////////////
 		if(strike == 3) return "정답입니다.";
 		return strike+"스트라이크" +ball+"볼";
-	}/////////////  end of call ////////////////////////
-	
+	}/////////////  end of call ////////////////////////	
 	//화면처리하기
-		public void initDisplay(){
-			jm_game.add(jmi_new);
-			jm_game.add(jmi_dap);
-			jm_game.add(js_game);
-			jm_game.add(jmi_exit);
-			jm_about.add(jmi_info);
-			jm_about.add(jmi_maker);
-			jmb.add(jm_game);
-			jmb.add(jm_about);
-			//JFrame에 JMenuBar설정
-			jf.setJMenuBar(jmb);
-			jm_game.setMnemonic('G');
-			jta_display.setEditable(false);
-			jp_center.setLayout(new BorderLayout());
-			jp_east.setLayout(new GridLayout(4,1,2,2));
-			jp_center.setBackground(Color.green);
-			jp_east.setBackground(Color.yellow);
-			for(int i=0;i<4;i++){
-				jbtns[i] = new JButton(jbtns_label[i]);
-				System.out.println(jbtns[i]);//@abc1234
-				jp_east.add(jbtns[i]);
-			}
-			//이벤트소스와 이벤트핸들러 클래스 매핑 코드
-			jtf_input.addActionListener(this);
-			jbtns[0].addActionListener(this);
-			jbtns[1].addActionListener(this);
-			jbtns[2].addActionListener(this);
-			jbtns[3].addActionListener(this);
-			Font myFont = new Font("Thoma",Font.BOLD,12);
-			jbtns[0].setFont(myFont);
-			//Color newColor = new Color(158,9,9);
-//			jbtns[0].setBackground(newColor);
-			jbtns[0].setBackground(new Color(158,9,9));
-			jbtns[0].setForeground(new Color(212,212,212));
-			jbtns[1].setBackground(new Color(7,84,170));
-			jbtns[1].setForeground(new Color(212,212,212));
-			jbtns[2].setBackground(new Color(19,99,57));
-			jbtns[2].setForeground(new Color(212,212,212));
-			jbtns[3].setBackground(new Color(54,54,54));
-			jbtns[3].setForeground(new Color(212,212,212));
-			jta_display.setBackground(new Color(255,255,200));
-			jta_display.setForeground(new Color(57,109,165));
-			int width = 400;
-			int height = 300;
-			boolean isVisible = true;
-			jp_center.add("Center",jsp_display);
-			jp_center.add("South",jtf_input);
-			jf.add("Center",jp_center);
-			jf.add("East",jp_east);
-			//화면이 열리면서 JTextField쪽에 커서가 깜박이기.
-			jtf_input.requestFocus();
-			jf.setTitle("야구숫자게임2");
-			jf.setSize(width, height);
-			jf.setVisible(isVisible);
-		}	
-		public BaseBallGame() {
-			initDisplay();
+	public void initDisplay(){
+		jm_game.add(jmi_new);
+		jm_game.add(jmi_dap);
+		jm_game.add(js_game);
+		jm_game.add(jmi_exit);
+		jm_about.add(jmi_info);
+		jm_about.add(jmi_maker);
+		jmb.add(jm_game);
+		jmb.add(jm_about);
+		//JFrame에 JMenuBar설정
+		jf.setJMenuBar(jmb);
+		jm_game.setMnemonic('G');
+		jta_display.setEditable(false);
+		jp_center.setLayout(new BorderLayout());
+		jp_east.setLayout(new GridLayout(4,1,2,2));
+		jp_center.setBackground(Color.green);
+		jp_east.setBackground(Color.yellow);
+		for(int i=0;i<4;i++){
+			jbtns[i] = new JButton(jbtns_label[i]);
+			System.out.println(jbtns[i]);//@abc1234
+			jp_east.add(jbtns[i]);
 		}
-		public static void main(String[] args) {
-			//new BaseBallGame();
-		}
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Object obj = e.getSource();
-			// 라벨값으로 처리하고 싶으면
-			String label = e.getActionCommand(); //새게임,지우기
-			System.out.println("event label:"+label);
-			if(obj == jtf_input){
-				String input =  jtf_input.getText().trim();
-				
-				//만일 숫자가 아닌 값이 있을 때도 고려해야 한다.
-				try {
-					Integer.parseInt(input);//356			
-				} catch (NumberFormatException nfe) {
-					 jop.showMessageDialog( jf, "숫자만 입력하세요", "Error", JOptionPane.ERROR_MESSAGE);
-					 jtf_input.setText("");
-					 jtf_input.requestFocus();				
-					return ;
-				}
-				
-				if(input.length()!=3){
-					return;
-				}
-				else{
-					 jta_display.append(++cnt+"."+ jtf_input.getText()+":"+call(input)+"\n");
-					 jtf_input.setText("");
-				}
-			}
-			else if("지우기".equals(label)){
-				 jta_display.setText("");
-				 jtf_input.requestFocus();
-			}
-			else if("종료".equals(label)){
-				System.exit(0);// 자바 가상머신과의 연결고리를 끊는다.
-			}
-			else if(obj ==  jmi_dap){
-				 jta_display.append("정답은 "+ com[0]+ com[1]+ com[2]+"\n");
-				 nanSu();
-			}
-			else if(obj ==  jbtns[1]){
-				 jta_display.append("정답은 "+ com[0]+ com[1]+ com[2]+"\n");
-				 nanSu();
-			}
-			//새게임
-			else if(obj ==  jbtns[0]){
-				cnt = 0;
-				 nanSu();
-				jta_display.setText("");
-				jtf_input.setText("");
-				jtf_input.requestFocus();
+		//이벤트소스와 이벤트핸들러 클래스 매핑 코드
+		jtf_input.addActionListener(this);
+		jbtns[0].addActionListener(this);
+		jbtns[1].addActionListener(this);
+		jbtns[2].addActionListener(this);
+		jbtns[3].addActionListener(this);
+		Font myFont = new Font("Thoma",Font.BOLD,12);
+		jbtns[0].setFont(myFont);
+		//Color newColor = new Color(158,9,9);
+//		jbtns[0].setBackground(newColor);
+		jbtns[0].setBackground(new Color(158,9,9));
+		jbtns[0].setForeground(new Color(212,212,212));
+		jbtns[1].setBackground(new Color(7,84,170));
+		jbtns[1].setForeground(new Color(212,212,212));
+		jbtns[2].setBackground(new Color(19,99,57));
+		jbtns[2].setForeground(new Color(212,212,212));
+		jbtns[3].setBackground(new Color(54,54,54));
+		jbtns[3].setForeground(new Color(212,212,212));
+		jta_display.setBackground(new Color(255,255,200));
+		jta_display.setForeground(new Color(57,109,165));
+		int width = 400;
+		int height = 300;
+		boolean isVisible = true;
+		jp_center.add("Center",jsp_display);
+		jp_center.add("South",jtf_input);
+		jf.add("Center",jp_center);
+		jf.add("East",jp_east);
+		//화면이 열리면서 JTextField쪽에 커서가 깜박이기.
+		jtf_input.requestFocus();
+		jf.setTitle("야구숫자게임2");
+		jf.setSize(width, height);
+		jf.setVisible(isVisible);
+	}	
+	public BaseBallGame() {
+		initDisplay();
+	}
+	public static void main(String[] args) {
+		new BaseBallGame();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		// 라벨값으로 처리하고 싶으면
+		String label = e.getActionCommand(); //새게임,지우기
+		System.out.println("event label:"+label);
+		if(obj == jtf_input){
+			String input =  jtf_input.getText().trim();
+			
+			//만일 숫자가 아닌 값이 있을 때도 고려해야 한다.
+			try {
+				Integer.parseInt(input);//356			
+			} catch (NumberFormatException nfe) {
+				 jop.showMessageDialog( jf, "숫자만 입력하세요", "Error", JOptionPane.ERROR_MESSAGE);
+				 jtf_input.setText("");
+				 jtf_input.requestFocus();				
+				return ;
 			}
 			
+			if(input.length()!=3){
+				return;
+			}
+			else{
+				 jta_display.append(++cnt+"."+ jtf_input.getText()+":"+call(input)+"\n");
+				 jtf_input.setText("");
+			}
 		}
+		else if("지우기".equals(label)){
+			 jta_display.setText("");
+			 jtf_input.requestFocus();
+		}
+		else if("종료".equals(label)){
+			System.exit(0);// 자바 가상머신과의 연결고리를 끊는다.
+		}
+		else if(obj ==  jmi_dap){
+			 jta_display.append("정답은 "+ com[0]+ com[1]+ com[2]+"\n");
+			 nanSu();
+		}
+		else if(obj ==  jbtns[1]){
+			 jta_display.append("정답은 "+ com[0]+ com[1]+ com[2]+"\n");
+			 nanSu();
+		}
+		//새게임
+		else if(obj ==  jbtns[0]){
+			cnt = 0;
+			 nanSu();
+			jta_display.setText("");
+			jtf_input.setText("");
+			jtf_input.requestFocus();
+		}
+		
 	}
+}
